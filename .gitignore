@@ -1,0 +1,6 @@
+.metadata/
+**/.vagrant/
+/.recommenders/
+RemoteSystemsTempFiles/
+RemoteSystemsTempFiles/.project
+back-end/src/test/java/drafter/utilities/TestConfig.java
