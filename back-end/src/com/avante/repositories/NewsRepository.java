@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+
 import com.avante.servlet.news.*;
 
 import com.avante.DatabaseConnectionFactory;
@@ -53,11 +55,41 @@ public class NewsRepository {
 			con.close();
 		}
 	}
-//	public News insert() throws SQLException{
-//		//get connection from connection pool
-//		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
-//		try
-//	}
+	public News insert(News news) throws SQLException{
+		Integer id = news.getId();
+        Date fecha = news.getFecha();
+        String titulo = news.getTitulo();
+        String descripcion = news.getDescripcion();
+        Integer userId = news.getUserId();
+      //get connection from connection pool
+      	Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection(); 
+        try
+        {
+        	// Inserting data in database
+            String q1 = "insert into News values('" +id+ "', '" +fecha+ 
+                                  "', '" +titulo+ "', '" +descripcion+ "', '"+userId+"')";
+        	PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
+			stmt.execute();
+			ResultSet rs = stmt.getGeneratedKeys(); 
+            
+            int x = stmt.executeUpdate(q1);
+            if (x > 0)            
+                System.out.println("Successfully Inserted");            
+            else           
+                System.out.println("Insert Failed");
+             
+            
+            rs.close();
+	        stmt.close();
+        }
+        catch(SQLException e)
+        {
+        	throw new IllegalStateException(e);
+        }finally {
+			con.close();
+		}
+		return news;
+	}
 	
 	
 }

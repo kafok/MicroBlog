@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import com.avante.DatabaseConnectionFactory;
+import com.avante.model.News;
 import com.avante.model.Session;
 
 public class SessionRepository {
@@ -51,6 +53,39 @@ public class SessionRepository {
 			con.close();
 		}
 	}
-	
+	public Session insert(Session session) throws SQLException{
+        Date fecha = session.getFecha();
+        
+        String cookies = session.getCookies();
+        Integer userId =session.getUserId();
+      //get connection from connection pool
+      	Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection(); 
+        try
+        {
+        	// Inserting data in database
+            String q1 = "insert into News values('" +fecha+ "', '" +cookies+ 
+                                  "', '" +userId+ "')";
+        	PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
+			stmt.execute();
+			ResultSet rs = stmt.getGeneratedKeys(); 
+            
+            int x = stmt.executeUpdate(q1);
+            if (x > 0)            
+                System.out.println("Successfully Inserted");            
+            else           
+                System.out.println("Insert Failed");
+             
+            
+            rs.close();
+	        stmt.close();
+        }
+        catch(SQLException e)
+        {
+        	throw new IllegalStateException(e);
+        }finally {
+			con.close();
+		}
+		return session;
+	}
 	
 }
