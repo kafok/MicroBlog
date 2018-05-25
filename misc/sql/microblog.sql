@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `microblog`
 --
+DROP DATABASE IF EXISTS `MicroBlog`;
+CREATE DATABASE IF NOT EXISTS `MicroBlog`;
+USE `MicroBlog`;
 
 -- --------------------------------------------------------
 
