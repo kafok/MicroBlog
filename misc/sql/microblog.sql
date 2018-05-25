@@ -24,18 +24,27 @@ CREATE DATABASE IF NOT EXISTS `MicroBlog`;
 USE `MicroBlog`;
 
 -- --------------------------------------------------------
-
+CREATE TABLE IF NOT EXISTS `user` (
+  `id_u` int(11) NOT NULL AUTO_INCREMENT,
+  `Email` varchar(100) NOT NULL,
+  `Password` varchar(100) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `Profile` text NOT NULL,
+  PRIMARY KEY (`id_u`)
+);
 --
 -- Estructura de tabla para la tabla `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
-  `id_n` int(11) NOT NULL,
+  `id_n` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha` datetime NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
-  PRIMARY KEY (`id_n`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id_n`),
+  FOREIGN KEY (`userId`) REFERENCES user(`id_u`)
+);
 
 -- --------------------------------------------------------
 
@@ -44,11 +53,13 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 CREATE TABLE IF NOT EXISTS `session` (
-  `id_s` int(11) NOT NULL,
+  `id_s` int(11) NOT NULL AUTO_INCREMENT,
   `cookies` varchar(300) NOT NULL,
   `fecha` datetime NOT NULL,
-  PRIMARY KEY (`id_s`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id_s`),
+  FOREIGN KEY (`userId`) REFERENCES user(`id_u`)
+);
 
 -- --------------------------------------------------------
 
@@ -56,14 +67,7 @@ CREATE TABLE IF NOT EXISTS `session` (
 -- Estructura de tabla para la tabla `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id_u` int(11) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `Name` varchar(100) NOT NULL,
-  `Profile` text NOT NULL,
-  PRIMARY KEY (`id_u`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Restricciones para tablas volcadas
@@ -72,14 +76,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 -- Filtros para la tabla `news`
 --
-ALTER TABLE `news`
-  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`id_n`) REFERENCES `user` (`id_u`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Filtros para la tabla `session`
---
-ALTER TABLE `session`
-  ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`id_s`) REFERENCES `user` (`id_u`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
