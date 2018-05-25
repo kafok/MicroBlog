@@ -28,12 +28,10 @@ public class UserRepository {
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 		try {
-			final String sql = "select * from microblog.news where id = " +id;
-			//create prepared statement with option to get auto generated keys
+			final String sql = "select * from microblog.news where id_u = " +id;
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.execute();
-			//Get auto generated keys
-	        ResultSet rs = stmt.getGeneratedKeys(); 
+			
+	        ResultSet rs = stmt.executeQuery(); 
 	        User u = new User();
 	        
 	        while (rs.next()) {

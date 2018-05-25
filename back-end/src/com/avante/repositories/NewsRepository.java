@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import com.avante.servlet.news.*;
 
 import com.avante.DatabaseConnectionFactory;
 import com.avante.model.News;
@@ -28,12 +27,10 @@ public class NewsRepository {
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 		try {
-			final String sql = "select * from microblog.news where id = " +id;
-			//create prepared statement with option to get auto generated keys
+			final String sql = "select * from microblog.news where id_n = " +id;
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.execute();
-			//Get auto generated keys
-	        ResultSet rs = stmt.getGeneratedKeys(); 
+			
+	        ResultSet rs = stmt.executeQuery();
 	        News n = new News();
 	        
 	        while (rs.next()) {

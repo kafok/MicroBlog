@@ -27,16 +27,14 @@ public class SessionRepository {
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 		try {
-			final String sql = "select * from microblog.news where id = " +id;
-			//create prepared statement with option to get auto generated keys
+			final String sql = "select * from microblog.news where id_s = " +id;
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.execute();
-			//Get auto generated keys
-	        ResultSet rs = stmt.getGeneratedKeys(); 
+	        
+			ResultSet rs = stmt.executeQuery();
 	        Session s = new Session();
 	        
 	        while (rs.next()) {
-	        	s.setId(rs.getInt("id_n"));
+	        	s.setId(rs.getInt("id_s"));
 	        	s.setCookies(rs.getString("cookies"));
 	            s.setFecha(rs.getDate("fecha"));
 	            s.setUserId(rs.getInt("userId"));
