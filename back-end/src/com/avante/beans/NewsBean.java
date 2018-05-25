@@ -1,5 +1,7 @@
 package com.avante.beans;
 
+import com.avante.model.News;
+
 public class NewsBean {
 	private int id;
 	private int userId;
@@ -51,5 +53,17 @@ public class NewsBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+	public static NewsBean toBean(News news) {
+		NewsBean res = new NewsBean();
+		res.setId(news.getId());
+		res.setUserId(news.getUserId());
+		res.setTitle(news.getTitulo());
+		res.setDescription(news.getDescripcion());
+		res.setDate(news.getFecha().getTime());
+		
+		return res;
 	}
 }
