@@ -1,5 +1,7 @@
 package com.avante.services;
 
+import com.avante.model.Session;
+
 public class SessionService {
 
 	private static SessionService instance = null;
@@ -16,5 +18,15 @@ public class SessionService {
 	}
 	
 	
+	public Session get(int id) {
+		return null;
+	}
 	
+	public Session save(Session session) {
+		return null;
+	}
+	
+	public void delete(int id) {
+		
+	}
 }

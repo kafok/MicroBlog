@@ -1,5 +1,7 @@
 package com.avante.services;
 
+import com.avante.model.User;
+
 public class UserService {
 
 	private static UserService instance = null;
@@ -16,5 +18,15 @@ public class UserService {
 	}
 	
 	
+	public User getPrincipal() {
+		return null;
+	}
 	
+	public User get(int id) {
+		return null;
+	}
+	
+	public User save(User user) {
+		return null;
+	}
 }
