@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 
 
 import com.avante.DatabaseConnectionFactory;
@@ -17,7 +18,6 @@ import com.avante.model.News;
 public class NewsRepository {
 
 	private static NewsRepository instance = null;
-	
 	public static NewsRepository get() {
 		if(instance == null)
 			instance = new NewsRepository();
@@ -28,7 +28,7 @@ public class NewsRepository {
 	private NewsRepository() {
 		super();
 	}
-	
+	//Get News by ID
 	public News get(int id) throws SQLException{
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
@@ -58,6 +58,7 @@ public class NewsRepository {
 			con.close();
 		}
 	}
+	//CREATE
 	public News insert(News news) throws SQLException{
 		Integer id = news.getId();
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy ");
@@ -97,12 +98,13 @@ public class NewsRepository {
 		}
 		return news;
 	}
+	//UPDATE
 	public boolean actualizar(News news) {
 		Connection con =null;
 		Statement stm =null;
 		boolean actualizar=false;
 		
-		String sql="UPDATE NEWS SET titulo = '"+news.getTitulo()+"',descripcion='"+news.getDescripcion()+"', fecha='"+news.getFecha()+"'"+"WHERE ID="+news.getId();
+		String sql="UPDATE microblog.news SET titulo = '"+news.getTitulo()+"',descripcion='"+news.getDescripcion()+"', fecha='"+news.getFecha()+"'"+"WHERE ID="+news.getId();
 		try {
 			con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 			stm=con.createStatement();
@@ -113,11 +115,14 @@ public class NewsRepository {
 			e.printStackTrace();
 		}return actualizar;
 	}
-	public boolean eliminar(News news) {
+	//DELETE
+	public boolean eliminar(int id) {
+		News n = new News();
 		Connection con = null;
 		Statement stm = null;
 		boolean eliminar= false;
-		String sql = "DELETE FROM NEWS WHERE ID="+news.getId();
+		
+		String sql = "DELETE FROM microblog.news WHERE ID="+n.getId();
 		try {
 			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
 			stm=con.createStatement();
@@ -129,6 +134,44 @@ public class NewsRepository {
 		}
 		return eliminar;
 	}
+	//Get List All News Paginated
+	 public List<News> getAllNews(int limit, int offset) {
+	       Connection con = null;
+	       Statement stm = null;
+	       ResultSet rs = null;
+	       String sql = "SELECT * FROM microblog.news LIMIT"+limit+ "OFFSET"+offset;
+	       List<News> listaNews =  new ArrayList<>();
+	       News n = new News();
+	       try {
+	    	   con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
+	    	   stm=con.createStatement();
+	    	   stm.execute(sql);
+	    	   while (rs.next()) {
+		        	n.setId(rs.getInt("id_n"));
+		        	n.setFecha(rs.getDate("fecha"));
+		            n.setTitulo(rs.getString("titulo"));
+		            n.setDescripcion(rs.getString("descripcion"));;
+		            n.setUserId(rs.getInt("userId"));
+		            listaNews.add(n);
+		        }
+		        
+		        rs.close();
+		        stm.close();
+	    	   
+	       }catch(SQLException e){
+	    	   System.out.println("Error: Metodo listar todas las noticias");
+				e.printStackTrace();
+	       }finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+	       return listaNews;
+	    }
+
 	
 }
 
