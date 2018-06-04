@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import {routing} from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -15,7 +16,8 @@ import {routing} from './app-routing.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
