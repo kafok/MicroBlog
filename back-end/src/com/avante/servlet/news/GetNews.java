@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.avante.DatabaseConnectionFactory;
 import com.avante.repositories.NewsRepository;
 import com.google.gson.Gson;
 
