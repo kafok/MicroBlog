@@ -90,7 +90,38 @@ public class NewsRepository {
 		}
 		return news;
 	}
-	
+	public boolean actualizar(News news) {
+		Connection con =null;
+		Statement stm =null;
+		boolean actualizar=false;
+		
+		String sql="UPDATE NEWS SET titulo = '"+news.getTitulo()+"',descripcion='"+news.getDescripcion()+"', fecha='"+news.getFecha()+"'"+"WHERE ID="+news.getId();
+		try {
+			con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+			stm=con.createStatement();
+			stm.execute(sql);
+			actualizar=true;
+		}catch(SQLException e) {
+			System.out.println("Error: metodo actualizar");
+			e.printStackTrace();
+		}return actualizar;
+	}
+	public boolean eliminar(News news) {
+		Connection con = null;
+		Statement stm = null;
+		boolean eliminar= false;
+		String sql = "DELETE FROM NEWS WHERE ID="+news.getId();
+		try {
+			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
+			stm=con.createStatement();
+			stm.execute(sql);
+			eliminar =true;
+		}catch(SQLException e) {
+			System.out.println("Error: Metodo delete");
+			e.printStackTrace();
+		}
+		return eliminar;
+	}
 	
 }
 

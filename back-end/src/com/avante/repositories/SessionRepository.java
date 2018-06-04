@@ -87,5 +87,21 @@ public class SessionRepository {
 		}
 		return session;
 	}
+	public boolean eliminar(Session session) {
+		Connection con = null;
+		Statement stm = null;
+		boolean eliminar= false;
+		String sql = "DELETE FROM NEWS WHERE ID="+session.getId();
+		try {
+			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
+			stm=con.createStatement();
+			stm.execute(sql);
+			eliminar =true;
+		}catch(SQLException e) {
+			System.out.println("Error: Metodo delete");
+			e.printStackTrace();
+		}
+		return eliminar;
+	}
 	
 }
