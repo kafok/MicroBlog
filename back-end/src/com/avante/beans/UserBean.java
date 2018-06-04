@@ -56,13 +56,4 @@ public class UserBean {
 		
 		return res;
 	}
-	
-	public static User toBean(UserBean user) {
-		User res = new User();
-		res.setId(user.getId());
-		res.setName(user.getName());
-		res.setEmail(user.getProfile());
-		
-		return res;
-	}
 }

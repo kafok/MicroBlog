@@ -1,6 +1,9 @@
 package com.avante.services;
 
+import java.sql.SQLException;
+
 import com.avante.model.Session;
+import com.avante.repositories.SessionRepository;
 
 public class SessionService {
 
@@ -18,15 +21,15 @@ public class SessionService {
 	}
 	
 	
-	public Session get(int id) {
-		return null;
+	public Session get(int id) throws SQLException {
+		return SessionRepository.get().get(id);
 	}
 	
-	public Session save(Session session) {
-		return null;
+	public Session save(Session session) throws SQLException {
+		return SessionRepository.get().insert(session);
 	}
 	
 	public void delete(int id) {
-		
+//		SessionRepository.get().delete(id);
 	}
 }

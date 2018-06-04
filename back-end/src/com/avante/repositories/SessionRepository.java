@@ -94,11 +94,12 @@ public class SessionRepository {
 		}
 		return session;
 	}
-	public boolean eliminar(Session session) {
+	public boolean eliminar(int id) {
+		Session s = new Session();
 		Connection con = null;
 		Statement stm = null;
 		boolean eliminar= false;
-		String sql = "DELETE FROM NEWS WHERE ID="+session.getId();
+		String sql = "DELETE FROM NEWS WHERE ID="+s.getId();
 		try {
 			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
 			stm=con.createStatement();
