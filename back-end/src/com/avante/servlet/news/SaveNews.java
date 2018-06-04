@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/data/SaveNews")
+@WebServlet("/data/news/save")
 public class SaveNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

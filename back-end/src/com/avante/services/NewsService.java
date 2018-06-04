@@ -1,5 +1,9 @@
 package com.avante.services;
 
+import java.util.Collection;
+
+import com.avante.model.News;
+
 public class NewsService {
 
 	private static NewsService instance = null;
@@ -16,5 +20,19 @@ public class NewsService {
 	}
 	
 	
+	public News get(int id) {
+		return null;
+	}
 	
+	public Collection<News> list() {
+		return null;
+	}
+	
+	public News save(News news) {
+		return null;
+	}
+	
+	public void delete(int id) {
+		
+	}
 }

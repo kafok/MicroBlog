@@ -1,10 +1,11 @@
 package com.avante.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Session extends Domain{
 	private String cookies;
-	private LocalDate fecha;
+	private Date fecha;
 	private Integer userId;
 	public Session() {
 		// TODO Auto-generated constructor stub
@@ -15,10 +16,10 @@ public class Session extends Domain{
 	public void setCookies(String cookies) {
 		this.cookies = cookies;
 	}
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public Integer getUserId() {
