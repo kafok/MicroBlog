@@ -26,11 +26,10 @@ public class GetNews extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		try {
-			response.getWriter().append(new Gson().toJson(NewsRepository.get().get(1)));
-		} catch (SQLException e) {
-			e.printStackTrace();
+			
+		} catch(Throwable e) {
+			response.setStatus(500);
 		}
 	}
 
