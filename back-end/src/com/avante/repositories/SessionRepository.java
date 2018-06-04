@@ -5,10 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
+
 import com.avante.DatabaseConnectionFactory;
-import com.avante.model.News;
+
 import com.avante.model.Session;
 
 public class SessionRepository {
@@ -54,7 +59,11 @@ public class SessionRepository {
 		}
 	}
 	public Session insert(Session session) throws SQLException{
-        Date fecha = session.getFecha();
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy ");
+		Date fecha = Calendar.getInstance().getTime(); 
+		String reportDate = df.format(fecha);
+		System.out.println("Report Date: " + reportDate);
+        
         
         String cookies = session.getCookies();
         Integer userId =session.getUserId();
