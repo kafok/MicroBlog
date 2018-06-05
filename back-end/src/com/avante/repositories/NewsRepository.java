@@ -4,11 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import com.avante.DatabaseConnectionFactory;
@@ -27,6 +23,7 @@ public class NewsRepository {
 	private NewsRepository() {
 		super();
 	}
+	
 	//Get News by ID
 	public News get(int id) throws SQLException{
 		//get connection from connection pool
@@ -57,53 +54,42 @@ public class NewsRepository {
 			con.close();
 		}
 	}
-	//CREATE
-	public News insert(News news) throws SQLException{
-		Integer id = news.getId();
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy ");
-		Date fecha = Calendar.getInstance().getTime(); 
-		String reportDate = df.format(fecha);
-		System.out.println("Report Date: " + reportDate);
-        
-        String titulo = news.getTitulo();
-        String descripcion = news.getDescripcion();
-        Integer userId = news.getUserId();
-      //get connection from connection pool
-      	Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection(); 
-        try
-        {
-        	// Inserting data in database
-            String q1 = "insert into News (id, fecha, titulo, descripcion, userId) values('" +id+ "', '" +fecha+ 
-                                  "', '" +titulo+ "', '" +descripcion+ "', '"+userId+"')";
-        	PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
+
+	// CREATE
+	public News insert(News news) throws SQLException {
+		String titulo = news.getTitulo();
+		String descripcion = news.getDescripcion();
+		Integer userId = news.getUserId();
+		// get connection from connection pool
+		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+		try {
+			// Inserting data in database
+			String q1 = "insert into News (fecha, titulo, descripcion, userId) values(CURDATE()"
+					+ ", '" + titulo + "', '" + descripcion + "', '" + userId + "')";
+			PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
 			stmt.execute();
-			ResultSet rs = stmt.getGeneratedKeys(); 
-            
-            int x = stmt.executeUpdate(q1);
-            if (x > 0)            
-                System.out.println("Successfully Inserted");            
-            else           
-                System.out.println("Insert Failed");
-             
-            
-            rs.close();
-	        stmt.close();
-        }
-        catch(SQLException e)
-        {
-        	throw new IllegalStateException(e);
-        }finally {
+			ResultSet rs = stmt.getGeneratedKeys();
+
+			rs.next();
+			news.setId(rs.getInt(1));
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new IllegalStateException(e);
+		} finally {
 			con.close();
 		}
 		return news;
 	}
+	
 	//UPDATE
 	public boolean actualizar(News news) {
 		Connection con =null;
 		Statement stm =null;
 		boolean actualizar=false;
 		
-		String sql="UPDATE microblog.news SET titulo = '"+news.getTitulo()+"',descripcion='"+news.getDescripcion()+"', fecha='"+news.getFecha()+"'"+"WHERE ID="+news.getId();
+		String sql="UPDATE microblog.news SET titulo = '"+news.getTitulo()+"',descripcion='"+news.getDescripcion()+"' WHERE id_n="+news.getId();
 		try {
 			con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 			stm=con.createStatement();
@@ -121,7 +107,7 @@ public class NewsRepository {
 		Statement stm = null;
 		boolean eliminar= false;
 		
-		String sql = "DELETE FROM microblog.news WHERE ID="+n.getId();
+		String sql = "DELETE FROM microblog.news WHERE id_n="+n.getId();
 		try {
 			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
 			stm=con.createStatement();

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.avante.beans.NewsBean;
 import com.avante.excetions.HttpResponseException;
 import com.avante.model.News;
 import com.avante.services.NewsService;
@@ -27,8 +28,10 @@ public class SaveNews extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			News news = new Gson().fromJson(request.getReader().lines().collect(Collectors.joining()), News.class);
-			NewsService.get().save(news, request);
+			NewsBean news = new Gson().fromJson(request.getReader().lines().collect(Collectors.joining()), NewsBean.class);
+			News res = NewsService.get().save(NewsService.get().fromBean(news), request);
+			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res)));	
+			response.setContentType("application/json");
 		} catch(HttpResponseException e) {
 			response.setStatus(e.getStatus());
 		} catch(Throwable e) {

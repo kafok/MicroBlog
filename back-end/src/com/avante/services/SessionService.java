@@ -29,7 +29,4 @@ public class SessionService {
 		return SessionRepository.get().insert(session);
 	}
 	
-	public void delete(int id) {
-//		SessionRepository.get().delete(id);
-	}
 }

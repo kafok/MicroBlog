@@ -47,6 +47,7 @@ public class NewsService {
 			throw new UnauthorizedException();
 			
 		if(news.getId() == 0) {
+			news.setFecha(new Date(System.currentTimeMillis()));
 			return NewsRepository.get().insert(news);
 		} else {
 			if(principal.getId() != this.get(news.getId()).getUserId())
@@ -76,9 +77,9 @@ public class NewsService {
 		} else
 			res = this.get(bean.getId());
 		
-		res.setDescripcion(bean.getDescription());
-		res.setFecha(new Date(bean.getDate()));
-		res.setTitulo(bean.getTitle());
+		res.setDescripcion(bean.getDescripcion());
+		res.setFecha(new Date(bean.getFecha()));
+		res.setTitulo(bean.getTitulo());
 		
 		return res;
 	}
