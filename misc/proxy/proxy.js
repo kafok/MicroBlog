@@ -11,7 +11,7 @@ var proxyWebsocket  = httpProxy.createProxyServer({
 });
 
 
-var data = '/data';
+var data = '/micro-blog/data';
 var server = http.createServer(function(req, res) {
 	if(req.url.slice(0, data.length) == data) {
 		proxy.web(req, res, { target: 'http://localhost:8080' });

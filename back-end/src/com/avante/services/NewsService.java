@@ -46,6 +46,7 @@ public class NewsService {
 		if(principal == null)
 			throw new UnauthorizedException();
 			
+		news.setUserId(principal.getId());
 		if(news.getId() == 0) {
 			news.setFecha(new Date(System.currentTimeMillis()));
 			return NewsRepository.get().insert(news);
