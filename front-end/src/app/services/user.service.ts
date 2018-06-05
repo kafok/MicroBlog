@@ -13,7 +13,7 @@ export class UserService {
   public principal: User;
 
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
   public login(login: Login): Observable<any> {
@@ -24,11 +24,11 @@ export class UserService {
     return this.http.post(environment.baseApi + "user/signout", {});
   }
 
-  public getUser(id: number) {
-    return this.http.get(environment.baseApi + "user/get?id=" + id);
+  public getUser(id: number): Observable<User> {
+    return this.http.get<User>(environment.baseApi + "user/get?id=" + id);
   }
 
-  public getPrincipal() {
-    return this.http.get(environment.baseApi + "user/principal");
+  public getPrincipal(): Observable<User> {
+    return this.http.get<User>(environment.baseApi + "user/principal");
   }
 }
