@@ -1,0 +1,37 @@
+.container{
+  
+   align-content: center;
+    background: gainsboro;
+}
+
+
+@media screen and (max-width:800px){
+
+    .container{
+
+        width: 100%;
+    }
+    .header{
+
+        width: 100%;
+    }
+    .footer{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:400px){
+
+    .container{
+
+        width: 100%;
+        background: paleturquoise;
+    }
+    .header{
+
+        width: 100%;
+    }
+    .footer{
+        width: 100%;
+    }
+}

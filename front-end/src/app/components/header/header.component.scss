@@ -1,16 +1,48 @@
-#componenteprincipal{ 
+.container{ 
     padding: 0%;
     margin: 0%;
 background-color: bisque;
 }
 
-    * navbar-inverse{
-    padding: 10%;
-    margin: 0%;
-    
-  }
+#titulo{
+    text-align: center;
+    color: aquamarine;
 
-  #container{ width: 100%;}
+}
+.menu{
+    width: 95%;
+    padding: 5%;
+    margin: 0%;
+}
+.home{
+    float: left;
+}
+.login{
+float: right;
+}
+
+  .container{ width: 100%;}
+ 
+  @media screen and (max-width:800px){
+
+    .container{
+
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width:400px){
+
+    .container{
+
+        width: 100%;
+        
+    }
+    
+
+
+}
   
 
  

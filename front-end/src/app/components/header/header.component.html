@@ -1,13 +1,15 @@
-<div id="componenteprincipal">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+  <div id="titulo">
   <h1>Bienvenido Header</h1>
-  <nav class="navbar navbar-inverse">
-    <div id="container">
-      <ol class="breadcrumb">
-        <li>
-          <a href="#">Home</a>
-          <a [routerLink]="['/login']"> Sign in </a>
-      </li> 
-      </ol>
-    </div>
-  </nav>
+</div>
+  <ol class="menu">
+    <li>
+
+      <a href="#">Home</a>
+      <div class="login">
+        <a [routerLink]="['/login']"> Sign in </a>
+      </div>
+    </li>
+  </ol>
 </div>
