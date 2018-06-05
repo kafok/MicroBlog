@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
 import com.avante.DatabaseConnectionFactory;
-import com.avante.model.News;
 import com.avante.model.Session;
 
 public class SessionRepository {
@@ -25,17 +23,20 @@ public class SessionRepository {
 	private SessionRepository() {
 		super();
 	}
+	
 	public Session get(int id) throws SQLException{
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 		try {
-			final String sql = "select * from microblog.news where id_s = " +id;
+			final String sql = "select * from microblog.session where id_s = " +id;
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	        
 			ResultSet rs = stmt.executeQuery();
 	        Session s = new Session();
 	        
+	        boolean exists = false;
 	        while (rs.next()) {
+	        	exists = true;
 	        	s.setId(rs.getInt("id_s"));
 	        	s.setCookies(rs.getString("cookies"));
 	            s.setFecha(rs.getDate("fecha"));
@@ -44,62 +45,54 @@ public class SessionRepository {
 	        
 	        rs.close();
 	        stmt.close();
-	        return s;
+	        return exists ? s : null;
 		} catch (SQLException e) {
 	        throw new IllegalStateException(e);}
 		finally {
 			con.close();
 		}
 	}
-	public Session insert(Session session) throws SQLException{
-        Date fecha = session.getFecha();
-        
-        String cookies = session.getCookies();
-        Integer userId =session.getUserId();
-      //get connection from connection pool
-      	Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection(); 
-        try
-        {
-        	// Inserting data in database
-            String q1 = "insert into News values('" +fecha+ "', '" +cookies+ 
-                                  "', '" +userId+ "')";
-        	PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
+	
+	public Session insert(Session session) throws SQLException {
+		Integer userId = session.getUserId();
+		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+		try {
+			// Inserting data in database
+			String q1 = "insert into Session (fecha, cookies, userId) values(CURDATE(), '', '" + userId + "')";
+			PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
 			stmt.execute();
-			ResultSet rs = stmt.getGeneratedKeys(); 
-            
-            int x = stmt.executeUpdate(q1);
-            if (x > 0)            
-                System.out.println("Successfully Inserted");            
-            else           
-                System.out.println("Insert Failed");
-             
-            
-            rs.close();
-	        stmt.close();
-        }
-        catch(SQLException e)
-        {
-        	throw new IllegalStateException(e);
-        }finally {
+			ResultSet rs = stmt.getGeneratedKeys();
+			
+			rs.next();
+			session.setId(rs.getInt(1));
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new IllegalStateException(e);
+		} finally {
 			con.close();
 		}
 		return session;
 	}
-	public boolean eliminar(Session session) {
+
+	public boolean eliminar(int id) throws SQLException {
+		Session s = new Session();
 		Connection con = null;
-		Statement stm = null;
-		boolean eliminar= false;
-		String sql = "DELETE FROM NEWS WHERE ID="+session.getId();
+		boolean eliminar = false;
+		String sql = "DELETE FROM microblog.Session WHERE id_s = " + s.getId();
 		try {
-			con=DatabaseConnectionFactory.getConnectionFactory().getConnection();
-			stm=con.createStatement();
-			stm.execute(sql);
-			eliminar =true;
-		}catch(SQLException e) {
+			con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.executeUpdate();
+			eliminar = true;
+		} catch (SQLException e) {
 			System.out.println("Error: Metodo delete");
 			e.printStackTrace();
+		} finally {
+			con.close();
 		}
 		return eliminar;
 	}
-	
+
 }

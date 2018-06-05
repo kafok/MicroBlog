@@ -51,17 +51,8 @@ public class UserBean {
 		UserBean res = new UserBean();
 		res.setId(user.getId());
 		res.setName(user.getName());
-		res.setEmail(user.getProfile());
+		res.setEmail(user.getEmail());
 		res.setProfile(user.getProfile() == null || user.getProfile().isEmpty() ? "/default.jpg" : user.getProfile());
-		
-		return res;
-	}
-	
-	public static User toBean(UserBean user) {
-		User res = new User();
-		res.setId(user.getId());
-		res.setName(user.getName());
-		res.setEmail(user.getProfile());
 		
 		return res;
 	}

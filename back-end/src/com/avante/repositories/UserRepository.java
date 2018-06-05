@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+
 
 import com.avante.DatabaseConnectionFactory;
-import com.avante.model.News;
+
 import com.avante.model.User;
 
 public class UserRepository {
@@ -26,11 +26,12 @@ public class UserRepository {
 		super();
 	}
 	
+	//Get User by ID
 	public User get(int id) throws SQLException{
 		//get connection from connection pool
 		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
 		try {
-			final String sql = "select * from microblog.news where id_u = " +id;
+			final String sql = "select * from microblog.user where id_u = " +id;
 			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 	        ResultSet rs = stmt.executeQuery(); 
@@ -53,6 +54,38 @@ public class UserRepository {
 			con.close();
 		}
 	}
+	
+	//Get user by EMAIL
+	public User get(String email) throws SQLException{
+		//get connection from connection pool
+		Connection con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+		try {
+			final String sql = "select * from microblog.user where email = '" +email+"'";
+			//create prepared statement with option to get auto generated keys
+			PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			//Get auto generated keys
+	        ResultSet rs = stmt.executeQuery();
+	        User u = new User();
+	        
+	        boolean exists = false;
+	        while (rs.next()) {
+	        	exists = true;
+	        	u.setId(rs.getInt("id_u"));
+	        	u.setEmail(rs.getString("email"));
+	            u.setPassword(rs.getString("password"));
+	            u.setProfile(rs.getString("profile"));
+	        }
+	        
+	        rs.close();
+	        stmt.close();
+	        return exists ? u : null;
+		} catch (SQLException e) {
+	        throw new IllegalStateException(e);}
+		finally {
+			con.close();
+		}
+	}
+	
 	public User insert(User user) throws SQLException{
 		Integer id = user.getId();
        String email= user.getEmail();

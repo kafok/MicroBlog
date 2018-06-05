@@ -1,6 +1,5 @@
 package com.avante.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Session extends Domain{
