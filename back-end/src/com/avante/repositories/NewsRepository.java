@@ -73,7 +73,7 @@ public class NewsRepository {
         try
         {
         	// Inserting data in database
-            String q1 = "insert into News values('" +id+ "', '" +fecha+ 
+            String q1 = "insert into News (id, fecha, titulo, descripcion, userId) values('" +id+ "', '" +fecha+ 
                                   "', '" +titulo+ "', '" +descripcion+ "', '"+userId+"')";
         	PreparedStatement stmt = con.prepareStatement(q1, Statement.RETURN_GENERATED_KEYS);
 			stmt.execute();

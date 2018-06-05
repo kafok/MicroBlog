@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.avante.model.Session;
 import com.avante.model.User;
+import com.avante.repositories.SessionRepository;
 import com.avante.repositories.UserRepository;
 
 public class UserService {
@@ -39,9 +40,14 @@ public class UserService {
 		}
 		
 		Session session = SessionService.get().get(sessionId);
-		if(session != null) 
+		if(session != null) {
+			if(session.getFecha().getTime() < System.currentTimeMillis()-2628000000L) {
+				SessionRepository.get().eliminar(session.getId());
+				return null;
+			}
+			
 			return this.get(session.getUserId());
-		else
+		} else
 			return null;
 	}
 	

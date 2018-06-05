@@ -2,6 +2,7 @@ package com.avante.servlet.user;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.avante.beans.AuthBean;
 import com.avante.beans.UserBean;
 import com.avante.excetions.HttpResponseException;
 import com.avante.excetions.NotFoundException;
@@ -21,7 +23,7 @@ import com.avante.services.UserService;
 import com.google.gson.Gson;
 
 
-@WebServlet("/data/user/singin")
+@WebServlet("/data/user/signin")
 public class SigninUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,11 +39,12 @@ public class SigninUser extends HttpServlet {
 			if(principal != null)
 				response.getWriter().append(new Gson().toJson(UserBean.toBean(principal)));
 			else {
-				User user = UserService.get().get(request.getParameter("email"));
+				AuthBean auth = new Gson().fromJson(request.getReader().lines().collect(Collectors.joining()), AuthBean.class);
+				User user = UserService.get().get(auth.getEmail());
 				if(user == null)
 					throw new NotFoundException();
 				
-				if(!user.getPassword().equals(request.getParameter("password")))
+				if(!user.getPassword().equals(auth.getPassword()))
 					throw new UnauthorizedException();
 				
 				Session session = new Session();
@@ -49,7 +52,12 @@ public class SigninUser extends HttpServlet {
 				session.setUserId(user.getId());
 				session = SessionService.get().save(session);
 				
-				response.addCookie(new Cookie("session", ""+session.getId()));
+				Cookie cookie = new Cookie("session", ""+session.getId());
+				cookie.setPath("/");
+				cookie.setHttpOnly(true);
+				cookie.setMaxAge(2628000);
+				response.addCookie(cookie);
+				response.getWriter().append(new Gson().toJson(UserBean.toBean(user)));
 			}
 				
 		} catch(HttpResponseException e) {
