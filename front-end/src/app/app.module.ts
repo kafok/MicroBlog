@@ -7,6 +7,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import {routing} from './app-routing.module';
+import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
+import { VistaPerfilComponent } from './components/perfil/vista-perfil/vista-perfil.component';
+import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-perfil.component';
 
 
 
@@ -15,7 +18,10 @@ import {routing} from './app-routing.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    RegisternewsComponent,
+    VistaPerfilComponent,
+    FondoPerfilComponent
   ],
   imports: [
     BrowserModule,
