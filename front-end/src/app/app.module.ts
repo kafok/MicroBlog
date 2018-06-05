@@ -9,6 +9,9 @@ import { LoginComponent } from './components/login/login.component';
 import {routing} from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { NewsComponent } from './components/news/news.component';
+import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
+import { VistaPerfilComponent } from './components/perfil/vista-perfil/vista-perfil.component';
+import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-perfil.component';
 
 
 enableProdMode();
@@ -19,7 +22,10 @@ enableProdMode();
     FooterComponent,
     LoginComponent,
     HomeComponent,
-    NewsComponent
+    NewsComponent,
+    RegisternewsComponent,
+    VistaPerfilComponent,
+    FondoPerfilComponent
   ],
   imports: [
     BrowserModule,
