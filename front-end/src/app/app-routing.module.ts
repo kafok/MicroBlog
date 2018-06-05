@@ -8,22 +8,16 @@ import { RegisternewsComponent } from './components/perfil/registernews/register
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
-  {
-    path: 'fondo-perfil', component: FondoPerfilComponent,
-    children: [
-      {
-        path: 'vista-perfil', component: VistaPerfilComponent,
-
-        children: [
-          { path: 'registernews', component: RegisternewsComponent},
+  
+  { path: 'vista-perfil', component: FondoPerfilComponent,
+    
+  children: [
+          { path: 'registrar', component: RegisternewsComponent}
 
         ]
       }
 
-    ]
-  }
-
-];
+    ];
 
 
-export const routing = RouterModule.forRoot(routes);
+    export const routing = RouterModule.forRoot(routes);
