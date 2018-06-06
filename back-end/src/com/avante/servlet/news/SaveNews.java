@@ -30,7 +30,7 @@ public class SaveNews extends HttpServlet {
 		try {
 			NewsBean news = new Gson().fromJson(request.getReader().lines().collect(Collectors.joining()), NewsBean.class);
 			News res = NewsService.get().save(NewsService.get().fromBean(news), request);
-			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res)));	
+			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res, null)));	
 			response.setContentType("application/json");
 		} catch(HttpResponseException e) {
 			response.setStatus(e.getStatus());
