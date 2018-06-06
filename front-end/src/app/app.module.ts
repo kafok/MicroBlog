@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, enableProdMode } from '@angular/core';
+import { NgModule, enableProdMode, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -13,6 +13,7 @@ import { NewsComponent } from './components/news/news.component';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
 import { VistaPerfilComponent } from './components/perfil/vista-perfil/vista-perfil.component';
 import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-perfil.component';
+import { RouterModule } from '@angular/router';
 
 
 enableProdMode();
@@ -32,9 +33,9 @@ enableProdMode();
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    PerformanceResourceTiming,
     CommonModule,
-    FormsModule
+    FormsModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]

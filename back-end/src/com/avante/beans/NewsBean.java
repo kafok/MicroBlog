@@ -5,6 +5,7 @@ import com.avante.model.News;
 public class NewsBean {
 	private int id;
 	private int userId;
+	private String userName;
 	private long fecha;
 	private String titulo;
 	private String descripcion;
@@ -55,14 +56,23 @@ public class NewsBean {
 		this.descripcion = descripcion;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
 
-	public static NewsBean toBean(News news) {
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+
+	public static NewsBean toBean(News news, String name) {
 		NewsBean res = new NewsBean();
 		res.setId(news.getId());
 		res.setUserId(news.getUserId());
 		res.setTitulo(news.getTitulo());
 		res.setDescripcion(news.getDescripcion());
 		res.setFecha(news.getFecha().getTime());
+		res.setUserName(name == null || name.isEmpty() ? "Desconocido" : name);
 		
 		return res;
 	}
