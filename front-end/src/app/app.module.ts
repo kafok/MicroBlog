@@ -25,7 +25,6 @@ import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-per
   ],
   imports: [
     BrowserModule,
-   
     routing
   ],
   providers: [],
