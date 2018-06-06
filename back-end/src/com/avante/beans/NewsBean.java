@@ -72,7 +72,7 @@ public class NewsBean {
 		res.setTitulo(news.getTitulo());
 		res.setDescripcion(news.getDescripcion());
 		res.setFecha(news.getFecha().getTime());
-		res.setUserName(name);
+		res.setUserName(name == null || name.isEmpty() ? "Desconocido" : name);
 		
 		return res;
 	}

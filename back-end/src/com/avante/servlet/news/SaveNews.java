@@ -39,5 +39,21 @@ public class SaveNews extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			for(int i=0; i<10000; i++) {
+				News res = new News();
+				res.setTitulo("Titulo " + i);
+				res.setDescripcion("Descripcion " + i);
+				NewsService.get().save(res, request);
+			}
+		} catch(HttpResponseException e) {
+			response.setStatus(e.getStatus());
+		} catch(Throwable e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
+	}
 
 }
