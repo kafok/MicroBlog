@@ -1,6 +1,6 @@
 
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent} from './components/login/login.component';
+import {LoginComponent} from './components/login/login.component';
 import {HomeComponent } from './components/home/home.component';
 import {NewsComponent} from './components/news/news.component';
 
@@ -10,9 +10,10 @@ import { RegisternewsComponent } from './components/perfil/registernews/register
 
 const routes: Routes = [
 
-  { path: 'login', component: LoginComponent },
+  
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'news', component: NewsComponent },
   
   {
@@ -33,4 +34,4 @@ const routes: Routes = [
 ];
 
 
-export const routing = RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes,{ enableTracing: true });

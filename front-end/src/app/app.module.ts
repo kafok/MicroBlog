@@ -29,9 +29,9 @@ enableProdMode();
   ],
   imports: [
     BrowserModule,
-    routing,
     CommonModule,
     FormsModule,
+    routing
    
   ],
   providers: [],
