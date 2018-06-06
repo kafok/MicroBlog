@@ -14,24 +14,16 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'news', component: NewsComponent },
   
-  {
-    path: 'fondo-perfil', component: FondoPerfilComponent,
-    children: [
-      {
-        path: 'vista-perfil', component: VistaPerfilComponent,
-
-        children: [
-          { path: 'registernews', component: RegisternewsComponent},
+  { path: 'vista-perfil', component: FondoPerfilComponent,
+    
+  children: [
+          { path: 'registrar', component: RegisternewsComponent}
 
         ]
       }
 
-    ]
-  }
-
-];
+    ];
 
 
 export const routing = RouterModule.forRoot(routes,{ enableTracing: true });
