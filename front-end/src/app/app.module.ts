@@ -13,6 +13,7 @@ import { NewsComponent } from './components/news/news.component';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
 import { VistaPerfilComponent } from './components/perfil/vista-perfil/vista-perfil.component';
 import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-perfil.component';
+import { RouterModule } from '@angular/router';
 
 
 enableProdMode();
@@ -32,9 +33,9 @@ enableProdMode();
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    PerformanceResourceTiming,
     CommonModule,
-    FormsModule
+    FormsModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]
