@@ -1,0 +1,41 @@
+<!--    Page Header-->
+<div class="masthead" style="background-image: url('assets/startbootstrap-clean-blog-gh-pages/img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>MicroBlog</h1>
+          <span class="subheading">A MicroBlog Theme by Start Bootstrap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div *ngFor="let n of news">
+        <div class="post-preview">
+          <a [routerLink]="['/news', n.id]">
+            <h2 class="post-title">
+              {{ n.titulo }}
+            </h2>
+          </a>
+          <p class="post-meta">Publicado por
+            <a [routerLink]="['vista-perfil', n.userId]">{{ n.userName }}</a>
+            el {{ n.fecha | date:'dd-MM-yyyy' }}</p>
+        </div>
+        <hr>
+      </div>
+      
+      <!-- Pager -->
+      <!-- <div class="clearfix">
+        <a class="btn btn-primary float-right" routerLink="/news">Older News &rarr;</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<hr>
