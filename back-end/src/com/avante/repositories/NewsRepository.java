@@ -159,6 +159,43 @@ public class NewsRepository {
 		return listaNews;
 	}
 
-	
+	// Get List News By User
+		public List<News> getListNewsByUser(int id,int limit, int offset) {
+			Connection con = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM microblog.news WHERE userId=" +id+" LIMIT " + limit + " OFFSET " + offset;
+			List<News> listaNews = new ArrayList<>();
+			News n = new News();
+			try {
+				con = DatabaseConnectionFactory.getConnectionFactory().getConnection();
+				stm = con.createStatement();
+				rs = stm.executeQuery(sql);
+				while (rs.next()) {
+					n = new News();
+					n.setId(rs.getInt("id_n"));
+					n.setFecha(rs.getDate("fecha"));
+					n.setTitulo(rs.getString("titulo"));
+					n.setDescripcion(rs.getString("descripcion"));
+					n.setUserId(rs.getInt("userId"));
+					listaNews.add(n);
+				}
+
+				rs.close();
+				stm.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error: Metodo listar todas las noticias");
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+			return listaNews;
+		}
 }
 
