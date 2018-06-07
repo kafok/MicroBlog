@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class NewsService {
 
   constructor(private http: HttpClient) { }
+  
 
   public getNews(id: number): Observable<News> {
     return this.http.get<News>(environment.baseApi + "news/get?id=" + id);

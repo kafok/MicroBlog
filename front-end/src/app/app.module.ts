@@ -11,9 +11,10 @@ import { routing } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { NewsComponent } from './components/news/news.component';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
-import { VistaPerfilComponent } from './components/perfil/vista-perfil/vista-perfil.component';
-import { FondoPerfilComponent } from './components/perfil/fondo-perfil/fondo-perfil.component';
 import { RouterModule } from '@angular/router';
+import { EditnewsComponent } from './components/perfil/editnews/editnews.component';
+import { DeletenewsComponent } from './components/perfil/deletenews/deletenews.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 enableProdMode();
@@ -26,8 +27,9 @@ enableProdMode();
     HomeComponent,
     NewsComponent,
     RegisternewsComponent,
-    VistaPerfilComponent,
-    FondoPerfilComponent
+    EditnewsComponent,
+    DeletenewsComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

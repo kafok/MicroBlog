@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="alert alert-danger" role="alert" *ngIf="msgError !== undefined">
+    {{ msgError }}
+  </div>
+
+  <h2> Editar noticia</h2>
+  <form (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="input1">Título</label>
+      <input type="titulo" class="form-control" name="titulo" [(ngModel)]="news.titulo">
+    </div>
+    <div class="form-group">
+      <label for="textarea1">Descripción</label>
+      <textarea class="form-control" name="descripcion" rows="5" maxlength="500" [(ngModel)]="news.descripcion"></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Aceptar</button>
+    </div>
+  </form>
+</div>
