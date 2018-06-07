@@ -31,4 +31,8 @@ export class UserService {
   public getPrincipal(): Observable<User> {
     return this.http.get<User>(environment.baseApi + "user/principal");
   }
+
+  public isAnonymous(): boolean {
+    return this.principal === undefined || this.principal === null;
+  }
 }

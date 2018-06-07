@@ -11,7 +11,6 @@ import { routing } from './app-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { NewsComponent } from './components/news/news.component';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
-
 import { RouterModule } from '@angular/router';
 
 

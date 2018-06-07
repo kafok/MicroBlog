@@ -30,8 +30,24 @@ public class SaveNews extends HttpServlet {
 		try {
 			NewsBean news = new Gson().fromJson(request.getReader().lines().collect(Collectors.joining()), NewsBean.class);
 			News res = NewsService.get().save(NewsService.get().fromBean(news), request);
-			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res)));	
+			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res, null)));	
 			response.setContentType("application/json");
+		} catch(HttpResponseException e) {
+			response.setStatus(e.getStatus());
+		} catch(Throwable e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			for(int i=0; i<10000; i++) {
+				News res = new News();
+				res.setTitulo("Titulo " + i);
+				res.setDescripcion("Descripcion " + i);
+				NewsService.get().save(res, request);
+			}
 		} catch(HttpResponseException e) {
 			response.setStatus(e.getStatus());
 		} catch(Throwable e) {
