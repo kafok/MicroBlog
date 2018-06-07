@@ -42,7 +42,7 @@ public class SaveNews extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			for(int i=0; i<10000; i++) {
+			for(int i=0; i<40; i++) {
 				News res = new News();
 				res.setTitulo("Titulo " + i);
 				res.setDescripcion("Descripcion " + i);

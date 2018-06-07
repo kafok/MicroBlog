@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+  public loaded;
 
-  public constructor() {}
+  public constructor(private userService: UserService) {}
 
   ngOnInit() {
+    this.loaded = false;
+    this.userService.getPrincipal().subscribe(res => {
+      this.userService.principal = res;
+      this.loaded = true;
+    }, error => {
+      this.loaded = true;
+    });
   }
 }

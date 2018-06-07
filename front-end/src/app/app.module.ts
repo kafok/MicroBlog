@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { EditnewsComponent } from './components/perfil/editnews/editnews.component';
 import { DeletenewsComponent } from './components/perfil/deletenews/deletenews.component';
 import { ListnewsComponent } from './components/perfil/listnews/listnews.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 enableProdMode();
@@ -30,6 +31,7 @@ enableProdMode();
     EditnewsComponent,
     DeletenewsComponent,
     ListnewsComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
