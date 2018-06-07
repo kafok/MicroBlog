@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from '../../../models/news';
 import { NewsService } from '../../../services/news.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'listnews',
@@ -10,12 +11,21 @@ import { NewsService } from '../../../services/news.service';
 export class ListnewsComponent implements OnInit {
 
   public news: Array<News>;
-  constructor(private newsService: NewsService) { }
+  public offset: number;
+
+  constructor(private newsService: NewsService, private userService: UserService) { }
 
   ngOnInit() {
     this.news = new Array<News>();
-    this.newsService.listByUser(0, 10, 0).subscribe(news => {
-      this.news = news;
+    this.offset = 0;
+    this.mas();
+  }
+
+  public mas() {
+    this.newsService.listByUser(this.offset, 10, this.userService.principal.id).subscribe(news => {
+      for(var n of news)
+        this.news.push(n);
+      this.offset += 10;
     });
   }
 }

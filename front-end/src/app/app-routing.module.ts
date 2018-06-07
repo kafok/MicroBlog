@@ -14,12 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-<<<<<<< HEAD
-  { path: 'news', component: NewsComponent },
-  { path: 'lista', component: ListnewsComponent},
-=======
+  { path: 'news/me', component: ListnewsComponent, canActivate: [LoginGuard]},
   { path: 'news/:id', component: NewsComponent },
->>>>>>> 5c3f520855021de21f3c68fe21c20dd442a82ed2
   { path: 'registrar', component: RegisternewsComponent},
   { path: 'editar', component: EditnewsComponent},
   { path: 'footer', component: FooterComponent },

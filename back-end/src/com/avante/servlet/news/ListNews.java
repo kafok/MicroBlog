@@ -33,7 +33,7 @@ public class ListNews extends HttpServlet {
 			int offset = Integer.parseInt(request.getParameter("offset"));
 			List<NewsBean> res = new LinkedList<>();
 			for(News n : NewsService.get().list(limit, offset)) {
-				res.add(NewsBean.toBean(n, UserService.get().get(n.getUserId()).getName()));
+				res.add(NewsBean.toBean(n, UserService.get().get(n.getUserId()).getEmail()));
 			}
 			
 			response.getWriter().append(new Gson().toJson(res));

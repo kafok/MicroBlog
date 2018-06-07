@@ -27,7 +27,7 @@
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
         <li class="nav-item" *ngIf="!userService.isAnonymous()">
-          <a class="nav-link" routerLink="/news">Mis noticias</a>
+          <a class="nav-link" routerLink="/news/me">Mis noticias</a>
         </li>
         <li class="nav-item" *ngIf="!userService.isAnonymous()">
           <a class="nav-link" routerLink="/news/new">Crear noticia</a>

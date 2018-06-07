@@ -29,7 +29,7 @@ public class GetNews extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			News res = NewsService.get().get(Integer.parseInt(request.getParameter("id")));
-			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res, UserService.get().get(res.getUserId()).getName())));	
+			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res, UserService.get().get(res.getUserId()).getEmail())));	
 			response.setContentType("application/json");
 		} catch(HttpResponseException e) {
 			response.setStatus(e.getStatus());
