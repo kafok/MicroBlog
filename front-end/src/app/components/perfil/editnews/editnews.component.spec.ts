@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VistaPerfilComponent } from './vista-perfil.component';
+import { EditnewsComponent } from './editnews.component';
 
-describe('VistaPerfilComponent', () => {
-  let component: VistaPerfilComponent;
-  let fixture: ComponentFixture<VistaPerfilComponent>;
+describe('EditnewsComponent', () => {
+  let component: EditnewsComponent;
+  let fixture: ComponentFixture<EditnewsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VistaPerfilComponent ]
+      declarations: [ EditnewsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VistaPerfilComponent);
+    fixture = TestBed.createComponent(EditnewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FondoPerfilComponent } from './fondo-perfil.component';
+import { DeletenewsComponent } from './deletenews.component';
 
-describe('FondoPerfilComponent', () => {
-  let component: FondoPerfilComponent;
-  let fixture: ComponentFixture<FondoPerfilComponent>;
+describe('DeletenewsComponent', () => {
+  let component: DeletenewsComponent;
+  let fixture: ComponentFixture<DeletenewsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FondoPerfilComponent ]
+      declarations: [ DeletenewsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FondoPerfilComponent);
+    fixture = TestBed.createComponent(DeletenewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

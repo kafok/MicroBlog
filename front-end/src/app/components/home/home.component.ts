@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../services/news.service';
 import { News } from '../../models/news';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
