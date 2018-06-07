@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'registrar', component: RegisternewsComponent},
   { path: 'editar', component: EditnewsComponent},
   { path: 'footer', component: FooterComponent },
-  { path: 'news/edit/:id', component: EditnewsComponent, canActivate: [LoginGuard] }
+  { path: 'news/edit/:id', component: EditnewsComponent, canActivate: [LoginGuard] },
+  { path: 'news/new', component: EditnewsComponent, canActivate: [LoginGuard] }
 
 ];
 

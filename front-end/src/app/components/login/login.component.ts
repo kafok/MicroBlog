@@ -17,11 +17,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.login = new Login();
+    if(!this.userService.isAnonymous())
+      this.router.navigate(['/home']);
   }
 
 
   onSubmit() {
-    console.log(this.login.email)
     this.userService.login(this.login).subscribe(res => {
       this.userService.principal = res;
       this.router.navigate(['/home']);
