@@ -42,7 +42,7 @@ public class NewsService {
 	}
 	
 	public News save(News news, HttpServletRequest request) throws SQLException {
-		User principal  = UserService.get().getPrincipal(request);
+		User principal = UserService.get().getPrincipal(request);
 		if(principal == null)
 			throw new UnauthorizedException();
 			
