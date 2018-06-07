@@ -12,6 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NewsComponent } from './components/news/news.component';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
 import { RouterModule } from '@angular/router';
+import { EditnewsComponent } from './components/perfil/editnews/editnews.component';
+import { DeletenewsComponent } from './components/perfil/deletenews/deletenews.component';
 
 
 enableProdMode();
@@ -24,6 +26,8 @@ enableProdMode();
     HomeComponent,
     NewsComponent,
     RegisternewsComponent,
+    EditnewsComponent,
+    DeletenewsComponent,
   ],
   imports: [
     BrowserModule,

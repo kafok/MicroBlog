@@ -6,6 +6,7 @@ import {NewsComponent} from './components/news/news.component';
 import { LoginGuard } from './guards/login.guard';
 import { RegisternewsComponent } from './components/perfil/registernews/registernews.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { EditnewsComponent } from './components/perfil/editnews/editnews.component';
 
 const routes: Routes = [
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'news/:id', component: NewsComponent },
 
   { path: 'registrar', component: RegisternewsComponent},
+  { path: 'editar', component: EditnewsComponent},
   { path: 'footer', component: FooterComponent }
 
 ];
