@@ -16,6 +16,7 @@ import { EditnewsComponent } from './components/perfil/editnews/editnews.compone
 import { DeletenewsComponent } from './components/perfil/deletenews/deletenews.component';
 import { ListnewsComponent } from './components/perfil/listnews/listnews.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 
 enableProdMode();
@@ -39,7 +40,8 @@ enableProdMode();
     HttpClientModule,
     CommonModule,
     FormsModule,
-    routing
+    routing,
+    MarkdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

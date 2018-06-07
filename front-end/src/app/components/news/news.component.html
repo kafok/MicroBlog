@@ -6,9 +6,10 @@
         <div *ngIf="news !== null else failed">
           <h1>{{ news.titulo }}</h1>
           <a *ngIf="imOwner()" [routerLink]="['/news/edit/'+news.id]" class="btn btn-success">Editar</a>
-          <div>
+          <!-- <div>
             {{ news.descripcion }}
-          </div>
+          </div> -->
+          <markdown [data]="news.descripcion"></markdown>
         </div>
 
         <ng-template #failed>
