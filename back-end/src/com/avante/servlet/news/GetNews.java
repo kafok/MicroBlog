@@ -12,6 +12,7 @@ import com.avante.beans.NewsBean;
 import com.avante.excetions.HttpResponseException;
 import com.avante.model.News;
 import com.avante.services.NewsService;
+import com.avante.services.UserService;
 import com.google.gson.Gson;
 
 
@@ -28,7 +29,7 @@ public class GetNews extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			News res = NewsService.get().get(Integer.parseInt(request.getParameter("id")));
-			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res)));	
+			response.getWriter().append(new Gson().toJson(NewsBean.toBean(res, UserService.get().get(res.getUserId()).getName())));	
 			response.setContentType("application/json");
 		} catch(HttpResponseException e) {
 			response.setStatus(e.getStatus());
