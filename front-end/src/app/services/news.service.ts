@@ -23,4 +23,10 @@ export class NewsService {
   public list(offset: number, limit: number): Observable<News[]> {
     return this.http.get<News[]>(environment.baseApi + "news/list?offset=" + offset + "&limit=" + limit);
   }
+
+  public listByUser(offset: number, limit: number, id:number): Observable<News[]> {
+    return this.http.get<News[]>(environment.baseApi + "news/listByUser?offset=" + offset + "&limit=" + limit + "&id=" + id);
+  }
+
+
 }
