@@ -1,5 +1,7 @@
 package com.avante.beans;
 
+import com.avante.model.User;
+
 public class UserBean {
 	private int id;
 	private String email;
@@ -42,5 +44,16 @@ public class UserBean {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+	public static UserBean toBean(User user) {
+		UserBean res = new UserBean();
+		res.setId(user.getId());
+		res.setName(user.getName());
+		res.setEmail(user.getEmail());
+		res.setProfile(user.getProfile() == null || user.getProfile().isEmpty() ? "/default.jpg" : user.getProfile());
+		
+		return res;
 	}
 }
